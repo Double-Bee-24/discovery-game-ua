@@ -10,6 +10,7 @@ export const REGIONS_MAP = {
   Zaporizka: 'Запорізька',
   IvanoFrankivska: 'Івано-Франківська',
   Kyivska: 'Київська',
+  Kyiv: 'Київ',
   Kirovohradska: 'Кіровоградська',
   Luhanska: 'Луганська',
   Lvivska: 'Львівська',
@@ -25,5 +26,5 @@ export const REGIONS_MAP = {
   Cherkaska: 'Черкаська',
   Chernivetska: 'Чернівецька',
   Chernihivska: 'Чернігівська',
-  Sevastopilska: 'Севастопольська',
+  Sevastopol: 'Севастополь',
 };
