@@ -1,0 +1,8 @@
+.region {
+  fill: papayawhip;
+
+  stroke: black;
+  stroke-width: 1px;
+
+  cursor: pointer;
+}
