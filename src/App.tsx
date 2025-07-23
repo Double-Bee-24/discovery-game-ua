@@ -1,6 +1,7 @@
 import './App.css'
 import { useRef } from 'react'
 import MapSvg from './components/MapSvg/MapSvg.tsx'
+import PlayButton from './components/PlayButton/PlayButton.tsx';
 
 function App() {
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -44,9 +45,14 @@ function App() {
 
   }
 
+  const handleStartGame = () => {
+
+  }
+
   return (
     <>
       <div>
+        <PlayButton handleClick={handleStartGame} />
         <MapSvg ref={svgRef} handleClick={handleDisabled} />
       </div>
     </>
