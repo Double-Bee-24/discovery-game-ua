@@ -8,11 +8,11 @@ const MapSvg = ({
 }: {
   svgRef: React.RefObject<SVGSVGElement | null>;
   handleClick: (event: React.MouseEvent<SVGPathElement>) => void;
-  disabledRegions: Set<string>;
+  disabledRegions: string[];
 }) => {
   const pathElements = REGIONS.map(region => (
     <path
-      className={`region ${region.key} ${disabledRegions.has(region.key) ? 'disabled' : ''}`.trim()}
+      className={`region ${region.key} ${disabledRegions.includes(region.key) ? 'disabled_region' : ''}`.trim()}
       key={region.key}
       onClick={handleClick}
       d={region.path}

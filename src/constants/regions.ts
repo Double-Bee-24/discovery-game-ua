@@ -8,7 +8,7 @@ export const REGIONS_MAP = {
   Zhytomyrska: 'Житомирська',
   Zakarpatska: 'Закарпатська',
   Zaporizka: 'Запорізька',
-  IvanoFrankivska: 'Івано-Франківська',
+  Ivano_Frankivska: 'Івано-Франківська',
   Kyivska: 'Київська',
   Kyiv: 'Київ',
   Kirovohradska: 'Кіровоградська',
@@ -27,4 +27,4 @@ export const REGIONS_MAP = {
   Chernivetska: 'Чернівецька',
   Chernihivska: 'Чернігівська',
   Sevastopol: 'Севастополь',
-};
+} as const;

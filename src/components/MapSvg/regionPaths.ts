@@ -83,9 +83,9 @@ export const REGIONS = [
   },
   { key: 'Zaporizka', id: 'UA23', name: 'Zaporizka', path: PATHS.ZAPORIZKA },
   {
-    key: 'Ivano-Frankivska',
+    key: 'Ivano_Frankivska',
     id: 'UA26',
-    name: 'Ivano-Frankivska',
+    name: 'Ivano_Frankivska',
     path: PATHS.IVANO_FRANKIVSKA,
   },
   { key: 'Kyivska', id: 'UA30', name: 'Kyivska', path: PATHS.KYIVSKA },
