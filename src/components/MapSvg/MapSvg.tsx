@@ -1,5 +1,5 @@
 import './MapSvg.css';
-import { PATHS } from './regionPaths';
+import { REGIONS } from './regionPaths';
 
 const MapSvg = ({
   svgRef,
@@ -10,6 +10,17 @@ const MapSvg = ({
   handleClick: (event: React.MouseEvent<SVGPathElement>) => void;
   disabledRegions: Set<string>;
 }) => {
+  const pathElements = REGIONS.map(region => (
+    <path
+      className={`region ${region.key} ${disabledRegions.has(region.key) ? 'disabled' : ''}`.trim()}
+      key={region.key}
+      onClick={handleClick}
+      d={region.path}
+      id={region.id}
+      name={region.name}
+    />
+  ));
+
   return (
     <svg
       ref={svgRef}
@@ -25,197 +36,7 @@ const MapSvg = ({
       width="1000"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="features">
-        <path
-          onClick={handleClick}
-          className={`region Krym ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.KRYM}
-          id="UA43"
-          name="Avtonomna Respublika Krym"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Vinnytska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.VINNYTSKA}
-          id="UA05"
-          name="Vinnytska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Volynska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.VOLYNSKA}
-          id="UA07"
-          name="Volynska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Dnipropetrovska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.DNIPROPETROVSKA}
-          id="UA12"
-          name="Dnipropetrovska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Donetska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.DONETSKA}
-          id="UA14"
-          name="Donetska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Zhytomyrska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.ZHYTOMYRSKA}
-          id="UA18"
-          name="Zhytomyrska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Zakarpatska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.ZAKARPATSKA}
-          id="UA21"
-          name="Zakarpatska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Zaporizka ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.ZAPORIZKA}
-          id="UA23"
-          name="Zaporizka"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Ivano-Frankivska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.IVANO_FRANKIVSKA}
-          id="UA26"
-          name="Ivano-Frankivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Kyivska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.KYIVSKA}
-          id="UA30"
-          name="Kyivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Kirovohradska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.KIROVOHRADSKA}
-          id="UA35"
-          name="Kirovohradska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Luhanska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.LUHANSKA}
-          id="UA09"
-          name="Luhanska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Lvivska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.LVIVSKA}
-          id="UA46"
-          name="Lvivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Mykolaivska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.MYKOLAIVSKA}
-          id="UA48"
-          name="Mykolaivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Odeska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.ODESKA}
-          id="UA51"
-          name="Odeska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Poltavska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.POLTAVSKA}
-          id="UA53"
-          name="Poltavska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Rivnenska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.RIVNENSKA}
-          id="UA56"
-          name="Rivnenska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Sumska ${disabledRegions.has('Krym') ? 'disabled' : ''}`}
-          d={PATHS.SUMSKA}
-          id="UA59"
-          name="Sumska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Ternopilska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.TERNOPILSKA}
-          id="UA61"
-          name="Ternopilska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Kharkivska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.KHARKIVSKA}
-          id="UA63"
-          name="Kharkivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Khersonska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.KHERSONSKA}
-          id="UA65"
-          name="Khersonska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Khmelnytska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.KHMELNYTSKA}
-          id="UA68"
-          name="Khmelnytska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Cherkaska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.CHERKASKA}
-          id="UA71"
-          name="Cherkaska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Chernivetska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.CHERNIVETSKA}
-          id="UA77"
-          name="Chernivetska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Chernihivska ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.CHERNIHIVSKA}
-          id="UA74"
-          name="Chernihivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Kyiv ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.KYIV}
-          id="UA32"
-          name="Kyivska"
-        ></path>
-        <path
-          onClick={handleClick}
-          className={`region Sevastopol ${disabledRegions.has('Krym') ? 'disabled' : ''} `}
-          d={PATHS.SEVASTOPOL}
-          id="UA40"
-          name="Sevastopilska"
-        ></path>
-      </g>
+      <g id="features">{pathElements}</g>
       <g id="points">
         <circle
           className="44.78553817544005|23.038043834624432"
