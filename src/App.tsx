@@ -3,41 +3,21 @@ import { useRef, useState } from 'react';
 import MapSvg from './components/MapSvg/MapSvg.tsx';
 import PlayButton from './components/PlayButton/PlayButton.tsx';
 import { REGIONS_MAP } from './constants/regions.ts';
+import { INITIAL_GAME_STATE } from './constants/initialGameState.ts';
 import { pickRandom } from './utils/array.utils.ts';
 
 const lang = 'ua';
-
-type RegionKey = keyof typeof REGIONS_MAP;
-
-interface GameState {
-  isGameStarted: boolean;
-  quizText: string;
-  guessedRegions: RegionKey[];
-  notGuessedRegions: RegionKey[];
-  regionToGuess: RegionKey;
-}
-
-// Think how to avoid as
-const notGuessedRegions: RegionKey[] = Object.keys(REGIONS_MAP) as RegionKey[];
-
-const INITIAL_GAME_STATE: GameState = {
-  isGameStarted: false,
-  quizText: 'Натисніть "Грати", щоб почати ⟶',
-  guessedRegions: [],
-  notGuessedRegions,
-  regionToGuess: pickRandom(notGuessedRegions),
-};
 
 function App() {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [gameState, setGameState] = useState(INITIAL_GAME_STATE);
 
   const handleStartGame = (): void => {
+    // Make sure game doesnt't resets by next click of a start button
     if (gameState.isGameStarted) {
       return;
     }
 
-    // const randomRegion = notGuessedRegions[Math.floor(Math.random() * notGuessedRegions.length)];
     const regionName =
       lang === 'ua'
         ? REGIONS_MAP[gameState.regionToGuess]
@@ -57,27 +37,39 @@ function App() {
 
     console.log(clickedRegion, gameState.regionToGuess);
 
-    if (clickedRegion === gameState.regionToGuess) {
-      setGameState(prev => {
-        const updatedGuessed = [...prev.guessedRegions, clickedRegion];
-        const updatedNotGuessed = [
-          ...prev.notGuessedRegions.filter(region => region !== clickedRegion),
-        ];
-        const randomRegion = pickRandom(updatedNotGuessed);
+    if (clickedRegion !== gameState.regionToGuess) {
+      return;
+    }
 
-        const regionName =
-          lang === 'ua' ? REGIONS_MAP[randomRegion] : randomRegion;
-        const updatedText = `Де знаходиться ${regionName} область ?`;
+    setGameState(prev => {
+      const updatedGuessed = [...prev.guessedRegions, clickedRegion];
+      const updatedNotGuessed = [
+        ...prev.notGuessedRegions.filter(region => region !== clickedRegion),
+      ];
 
+      if (updatedNotGuessed.length === 0) {
         return {
           ...prev,
-          quizText: updatedText,
-          guessedRegions: updatedGuessed,
-          notGuessedRegions: updatedNotGuessed,
-          regionToGuess: randomRegion
-        };
-      });
-    }
+          notGuessedRegions: [],
+          guessedRegions: updatedGuessed, isGameStarted: false,
+          quizText: 'Вітаємо! Ви завершили гру!',
+        }
+      }
+
+      const randomRegion = pickRandom(updatedNotGuessed);
+
+      const regionName =
+        lang === 'ua' ? REGIONS_MAP[randomRegion] : randomRegion;
+      const updatedText = `Де знаходиться ${regionName} область ?`;
+
+      return {
+        ...prev,
+        quizText: updatedText,
+        guessedRegions: updatedGuessed,
+        notGuessedRegions: updatedNotGuessed,
+        regionToGuess: randomRegion
+      };
+    });
   };
 
   return (
