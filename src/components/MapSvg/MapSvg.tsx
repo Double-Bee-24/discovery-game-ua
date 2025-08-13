@@ -10,16 +10,22 @@ const MapSvg = ({
   handleClick: (event: React.MouseEvent<SVGPathElement>) => void;
   disabledRegions: string[];
 }) => {
-  const pathElements = REGIONS.map(region => (
-    <path
-      className={`region ${region.key} ${disabledRegions.includes(region.key) ? 'disabled_region' : ''}`.trim()}
-      key={region.key}
-      onClick={handleClick}
-      d={region.path}
-      id={region.id}
-      name={region.name}
-    />
-  ));
+
+  console.log(REGIONS
+    .filter(region => region.key !== "Sevastopol" && region.key !== "Kyiv"), 'here'
+  )
+  const pathElements = REGIONS
+    .filter(region => region.key !== "Sevastopol" && region.key !== "Kyiv")
+    .map(region => (
+      <path
+        className={`region ${region.key} ${disabledRegions.includes(region.key) ? 'disabled_region' : ''}`.trim()}
+        key={region.key}
+        onClick={handleClick}
+        d={region.path}
+        id={region.id}
+        name={region.name}
+      />
+    ));
 
   return (
     <svg

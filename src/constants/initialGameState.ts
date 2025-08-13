@@ -3,7 +3,11 @@ import type { GameState } from "../types/GameState.interface";
 import { REGIONS_MAP } from "./regions";
 import { pickRandom } from "../utils/array.utils";
 
-const notGuessedRegions: RegionKey[] = Object.keys(REGIONS_MAP) as RegionKey[];
+const regions = Object.keys(REGIONS_MAP) as RegionKey[];
+
+// Remove cities
+const notGuessedRegions: RegionKey[] = regions.filter(region =>
+  region !== "Sevastopol" && region !== "Kyiv");
 
 export const INITIAL_GAME_STATE: GameState = {
   isGameStarted: false,
